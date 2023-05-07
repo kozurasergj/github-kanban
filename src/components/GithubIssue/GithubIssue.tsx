@@ -27,10 +27,10 @@ export const GithubIssue = () => {
 
   const [url, setUrl] = useState<string>('');
 
-  const [boards, setBoards] = useState<Board[] | []>([]);
+  const [boards, setBoards] = useState<Board[]>([]);
 
-  const [currentBoard, setCurrentBoard] = useState<Board | []>([]);
-  const [currentItem, setCurrentItem] = useState<Issue | []>([]);
+  const [currentBoard, setCurrentBoard] = useState<Board>([]);
+  const [currentItem, setCurrentItem] = useState<Issue>([]);
 
 
   const dragOverHandler = (e: React.DragEvent<EventTarget>) => {
@@ -59,13 +59,13 @@ export const GithubIssue = () => {
     }))
   }
 
-  const dropCardHendler = (e: React.DragEvent<EventTarget>, board) => {
+  const dropCardHendler = (e: React.DragEvent<EventTarget>, board: Board) => {
     board.items.push(currentItem);
     const currentIndex = (currentBoard && currentBoard.items.indexOf(currentItem));
     currentBoard && currentBoard.items.splice(currentIndex, 1);
     setBoards(boards.map(b => {
       if (b.id === board.id) {
-        return board; 
+        return board;
       }
       if (b.id === currentBoard.id) {
         return currentBoard;
