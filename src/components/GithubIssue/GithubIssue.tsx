@@ -29,8 +29,8 @@ export const GithubIssue = () => {
 
   const [boards, setBoards] = useState<Board[]>([]);
 
-  const [currentBoard, setCurrentBoard] = useState<Board>([]);
-  const [currentItem, setCurrentItem] = useState<Issue>([]);
+  const [currentBoard, setCurrentBoard] = useState<Board | null>(null);
+  const [currentItem, setCurrentItem] = useState<Issue | null>(null);
 
 
   const dragOverHandler = (e: React.DragEvent<EventTarget>) => {
@@ -42,37 +42,49 @@ export const GithubIssue = () => {
     setCurrentItem(item);
   }
 
-  const dragDropHandler = (e: React.DragEvent<EventTarget>, board: Board, item: Issue[]) => {
+  const dragDropHandler = (e: React.DragEvent<HTMLDivElement>, board: Board, item: Issue) => {
     e.preventDefault();
-    const currentIndex = (currentBoard && currentBoard.items.indexOf(currentItem));
-    currentBoard && currentBoard.items.splice(currentIndex, 1);
-    const dropIndex = board.items.indexOf(item);
-    board.items.splice(dropIndex + 1, 0, currentItem)
-    setBoards(boards && boards.map(b => {
-      if (b.id === board.id) {
-        return board;
-      }
-      if (b.id === currentBoard.id) {
-        return currentBoard;
-      }
-      return b;
-    }))
-  }
+    if (!currentBoard || !currentItem) return;
 
-  const dropCardHendler = (e: React.DragEvent<EventTarget>, board: Board) => {
+    const currentIndex = currentBoard.items.indexOf(currentItem);
+    currentBoard.items.splice(currentIndex, 1);
+
+    const dropIndex = board.items.indexOf(item);
+    board.items.splice(dropIndex + 1, 0, currentItem);
+
+    setBoards((boards) =>
+      boards.map((b) => {
+        if (b.id === board.id) {
+          return board;
+        }
+        if (b.id === currentBoard.id) {
+          return currentBoard;
+        }
+        return b;
+      })
+    );
+  };
+
+
+  const dropCardHendler = (e: React.DragEvent<HTMLDivElement>, board: Board) => {
+    if (!currentBoard || !currentItem) return;
+
     board.items.push(currentItem);
-    const currentIndex = (currentBoard && currentBoard.items.indexOf(currentItem));
-    currentBoard && currentBoard.items.splice(currentIndex, 1);
-    setBoards(boards.map(b => {
-      if (b.id === board.id) {
-        return board;
-      }
-      if (b.id === currentBoard.id) {
-        return currentBoard;
-      }
-      return b;
-    }))
-  }
+    const currentIndex = currentBoard.items.indexOf(currentItem);
+    currentBoard.items.splice(currentIndex, 1);
+
+    setBoards((boards) =>
+      boards.map((b) => {
+        if (b.id === board.id) {
+          return board;
+        }
+        if (b.id === currentBoard.id) {
+          return currentBoard;
+        }
+        return b;
+      })
+    );
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
@@ -120,7 +132,11 @@ export const GithubIssue = () => {
             onDragOver={(e) => dragOverHandler(e)}
             onDrop={(e) => { dropCardHendler(e, board) }}
           >
-            <Title level={2} style={{ textAlign: 'center' }} >{board.title}</Title>
+            <Title
+              level={2}
+              style={{ textAlign: 'center' }} >
+              {board.title}
+            </Title>
             <Divider />
             {board.items && board.items.map(item =>
               <Card
@@ -129,15 +145,24 @@ export const GithubIssue = () => {
                 onDragStart={(e) => dragStartHandler(e, board, item)}
                 onDrop={(e) => dragDropHandler(e, board, item)}
                 draggable
-                title={item.title} size="small" bordered={true}>
-                <Title level={5} style={{ textAlign: 'center' }} >
-                  Decs: {`${item.body && item.body.slice(0, 100)}...`}</Title>
+                title={item.title}
+                size="small"
+                bordered={true}>
+                <Title
+                  level={5}
+                  style={{ textAlign: 'center' }}>
+                  Decs: {`${item.body && item.body.slice(0, 100)}...`}
+                </Title>
                 <p>Date: {new Date(item.created_at).toLocaleString()}</p>
-                <p><a href={item.html_url}>{item.html_url}</a></p>
+                <p>
+                  <a href={item.html_url}>{item.html_url}</a>
+                </p>
                 <p style={{ width: '100px' }}>
-                  <img src={item.user.avatar_url}
+                  <img
+                    src={item.user.avatar_url}
                     style={{ width: '100%', height: '100%' }}
-                    alt="User Avatar" /></p>
+                    alt="User Avatar" />
+                </p>
                 <p>User: {item.user.login}</p>
               </Card>
             )}
