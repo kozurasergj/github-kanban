@@ -1,6 +1,4 @@
-# Dev Mentorship
-
-## Unie
+## Canban Board
 
 ## Please use yarn to install dependencies
 
@@ -16,7 +14,7 @@ yarn
 
 ## Scripts
 
-- `yarn dev` — Starts the application in development mode at `http://localhost:7777`.
+- `yarn dev` — Starts the application in development mode at `http://localhost:3000`.
 - `yarn build` — Creates an optimized production build of your application.
 - `yarn start` — Starts the application in production mode.
 - `yarn typecheck` — Validates code using TypeScript compiler.
@@ -25,9 +23,3 @@ yarn
 - `yarn stylelint` — Runs Stylelint.
 - `yarn stylelint-fix` — Fix stylelint issues.
 - `yarn format` — Runs Prettier.
-
-## Зачем нам все эти линтеры в проекте?
-
-[youtube видео](https://youtu.be/j9E0ZRbPW_c) с ответом на вопрос
-
-[PR](https://github.com/DevMentorship/paravina-rebuild/pull/3) с добавлением линтеров
