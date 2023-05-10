@@ -1,10 +1,15 @@
 import { Page } from '@/components/Page';
-// import 'antd/dist/antd.css';
+import store from '../store/store';
+import { Provider } from 'react-redux';
+
+
 
 export default function Home() {
   return (
     <>
-      <Page />
+      <Provider store={store}>
+        <Page />
+      </Provider>
     </>
   );
 }

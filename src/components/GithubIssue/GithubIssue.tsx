@@ -1,107 +1,25 @@
 import { useState } from 'react';
 import { Row, Col, Form, Input, Button, Card, Divider } from 'antd';
-import axios from 'axios';
 import { Typography } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Board, GetIssuesAction, Issue } from '@/interface/interface';
+import { getIssuesCreator } from '@/store/reducer';
 const { Title } = Typography;
-
-interface Issue {
-  id: number;
-  title: string;
-  number: number;
-  user: {
-    login: string;
-    avatar_url: string;
-  };
-  created_at: string;
-  html_url: string;
-  body: string;
-}
-
-interface Board {
-  id: number;
-  title: string;
-  items: Issue[];
-}
+import { Dispatch } from 'redux';
 
 export const GithubIssue = () => {
-
   const [url, setUrl] = useState<string>('');
 
-  const [boards, setBoards] = useState<Board[]>([]);
-
-  const [currentBoard, setCurrentBoard] = useState<Board | null>(null);
-  const [currentItem, setCurrentItem] = useState<Issue | null>(null);
-
-
-  const dragOverHandler = (e: React.DragEvent<EventTarget>) => {
-    e.preventDefault();
-  }
-
-  const dragStartHandler = (e: React.DragEvent<EventTarget>, board: Board, item: Issue) => {
-    setCurrentBoard(board);
-    setCurrentItem(item);
-  }
-
-  const dragDropHandler = (e: React.DragEvent<HTMLDivElement>, board: Board, item: Issue) => {
-    e.preventDefault();
-    if (!currentBoard || !currentItem) return;
-
-    const currentIndex = currentBoard.items.indexOf(currentItem);
-    currentBoard.items.splice(currentIndex, 1);
-
-    const dropIndex = board.items.indexOf(item);
-    board.items.splice(dropIndex + 1, 0, currentItem);
-
-    setBoards((boards) =>
-      boards.map((b) => {
-        if (b.id === board.id) {
-          return board;
-        }
-        if (b.id === currentBoard.id) {
-          return currentBoard;
-        }
-        return b;
-      })
-    );
-  };
-
-
-  const dropCardHendler = (e: React.DragEvent<HTMLDivElement>, board: Board) => {
-    if (!currentBoard || !currentItem) return;
-
-    board.items.push(currentItem);
-    const currentIndex = currentBoard.items.indexOf(currentItem);
-    currentBoard.items.splice(currentIndex, 1);
-
-    setBoards((boards) =>
-      boards.map((b) => {
-        if (b.id === board.id) {
-          return board;
-        }
-        if (b.id === currentBoard.id) {
-          return currentBoard;
-        }
-        return b;
-      })
-    );
-  };
+  const dispatch = useDispatch<Dispatch<any>>();
+  const issues = useSelector(state => state.issues);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(event.target.value);
+    setUrl(event.target.value.trim());
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     if (url) {
-      try {
-        const response = await axios.get<Issue[]>(`https://api.github.com/repos/${url}/issues`);
-        setBoards([
-          { id: 1, title: 'ToDo', items: response.data },
-          { id: 2, title: 'In Progress', items: [] },
-          { id: 3, title: 'Done', items: [] }
-        ]);
-      } catch (error) {
-        console.error(error);
-      }
+      dispatch(getIssuesCreator(url));
     }
   };
 
@@ -126,11 +44,9 @@ export const GithubIssue = () => {
         </Form>
       </Col>
       <Row justify="space-between"  >
-        {boards && boards.map((board) =>
+        {issues && issues.map((board: Board) =>
           <Col span={7}
             style={{ background: '#eee', borderRadius: '10px', cursor: 'grab' }}
-            onDragOver={(e) => dragOverHandler(e)}
-            onDrop={(e) => { dropCardHendler(e, board) }}
           >
             <Title
               level={2}
@@ -138,12 +54,9 @@ export const GithubIssue = () => {
               {board.title}
             </Title>
             <Divider />
-            {board.items && board.items.map(item =>
+            {board.items && board.items.length > 0 && board.items.map(item =>
               <Card
                 key={item.id}
-                onDragOver={(e) => dragOverHandler(e)}
-                onDragStart={(e) => dragStartHandler(e, board, item)}
-                onDrop={(e) => dragDropHandler(e, board, item)}
                 draggable
                 title={item.title}
                 size="small"

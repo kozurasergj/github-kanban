@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta content="Unie Espresso Bar - первый эспрессо бар в Самаре" name="description" />
         <meta content="#110c11" name="msapplication-TileColor" />
         <meta content="#110c11" name="theme-color" />
-        <title>Unie Espresso Bar</title>
+        <title>Canban Board</title>
       </Head>
       <Component {...pageProps} />
     </>
