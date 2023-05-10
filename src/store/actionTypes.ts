@@ -1,2 +1,3 @@
-// export const ADD_TODO = 'ADD_TODO';
-// export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const GET = 'GET';
+export const ERROR = 'ERROR';
+export const REORDER_ISSUES = 'REORDER_ISSUES'; 

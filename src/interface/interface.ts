@@ -28,3 +28,16 @@ export interface GetIssuesErrorAction {
 }
 
 export type GetIssuesAction = GetIssuesSuccessAction | GetIssuesErrorAction;
+
+export type ReorderIssuesAction = {
+  type: 'REORDER_ISSUES';
+  payload: {
+    boardId: number;
+    startIndex: number;
+    endIndex: number;
+  };
+};
+
+export interface defaultStateDragDrop {
+  issues: Board[];
+};
