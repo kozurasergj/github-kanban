@@ -1,3 +1,4 @@
 export const GET = 'GET';
-export const ERROR = 'ERROR';
-export const REORDER_ISSUES = 'REORDER_ISSUES'; 
+export const START = 'START';
+export const DROP = 'DROP';
+export const DROP_EMPTY = 'DROP_EMPTY';

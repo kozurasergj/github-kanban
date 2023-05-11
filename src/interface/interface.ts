@@ -18,26 +18,32 @@ export interface Board {
 }
 
 export interface GetIssuesSuccessAction {
-  type: 'GET',
-  payload: Issue[]
+  type: 'GET';
+  payload: Issue[];
 }
 
 export interface GetIssuesErrorAction {
-  type: 'ERROR',
-  payload?: string
+  type: 'ERROR';
+  payload?: string;
 }
 
-export type GetIssuesAction = GetIssuesSuccessAction | GetIssuesErrorAction;
-
-export type ReorderIssuesAction = {
-  type: 'REORDER_ISSUES';
-  payload: {
-    boardId: number;
-    startIndex: number;
-    endIndex: number;
-  };
-};
+export type GetIssuesAction = GetIssuesSuccessAction | GetIssuesErrorAction | RootState;
 
 export interface defaultStateDragDrop {
   issues: Board[];
-};
+}
+
+export interface DragDropState {
+  currentBoard: Board | null;
+  currentItem: Issue | null;
+}
+export interface RootState {
+  apiGitHub: {
+    issues: Board[];
+  };
+  dragDrop: {
+    currentBoard: Board | null;
+    currentItem: Issue | null;
+    emptyCurrentItem: Issue | null;
+  };
+}
