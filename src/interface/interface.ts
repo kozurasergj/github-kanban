@@ -18,16 +18,16 @@ export interface Board {
 }
 
 export interface GetIssuesSuccessAction {
-  type: 'GET';
+  type: string;
   payload: Issue[];
 }
 
 export interface GetIssuesErrorAction {
-  type: 'ERROR';
+  type: string;
   payload?: string;
 }
 
-export type GetIssuesAction = GetIssuesSuccessAction | GetIssuesErrorAction | RootState;
+export type GetIssuesAction = GetIssuesSuccessAction | GetIssuesErrorAction;
 
 export interface defaultStateDragDrop {
   issues: Board[];

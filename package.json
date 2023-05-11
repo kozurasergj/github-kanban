@@ -14,6 +14,7 @@
     "stylelint": "stylelint **/*.css",
     "stylelint-fix": "stylelint **/*.css --fix",
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+    "pre-commit": "lint-staged",
     "postinstall": "husky install"
   },
   "dependencies": {
