@@ -10,16 +10,16 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta content="website" property="og:type" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta content="/unie-photo.jpg" property="og:image" />
-        <meta content="Unie Espresso Bar - logo" property="og:image:alt" />
-        <meta property="og:title" content="Unie Espresso Bat - первый эспрессо бар в Самаре" />
-        <meta property="og:description" content="Unie Espresso Bar - первый эспрессо бар в Самаре" />
+        <meta content="/canban-board-photo.jpg" property="og:image" />
+        <meta content="Canban Board - logo" property="og:image:alt" />
+        <meta property="og:title" content="Canban Board - онлайн-доска для управления проектами" />
+        <meta property="og:description" content="Canban Board - онлайн-доска для управления проектами на GitHub" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="627" />
-        <meta content="Unie Espresso Bar" property="og:site_name"></meta>
-        <meta content="Unie Espresso Bar - первый эспрессо бар в Самаре" name="description" />
-        <meta content="#110c11" name="msapplication-TileColor" />
-        <meta content="#110c11" name="theme-color" />
+        <meta content="Canban Board" property="og:site_name"></meta>
+        <meta content="Canban Board - онлайн-доска для управления проектами на GitHub" name="description" />
+        <meta content="#0079b8" name="msapplication-TileColor" />
+        <meta content="#0079b8" name="theme-color" />
         <title>Canban Board</title>
       </Head>
       <Component {...pageProps} />

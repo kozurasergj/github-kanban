@@ -119,9 +119,11 @@ export const GithubIssue = () => {
             state.apiGitHubIssues &&
             state.apiGitHubIssues.map((board: Board) => (
               <Col
+                className="cypress"
                 span={7}
                 style={{ background: '#eee', borderRadius: '10px', cursor: 'grab' }}
                 key={board.id}
+                draggable
                 onDragOver={(e) => dragOverHandler(e)}
                 onDrop={(e) => {
                   dropCardHandler(e, board);

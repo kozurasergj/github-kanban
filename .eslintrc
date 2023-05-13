@@ -1,7 +1,8 @@
 {
   "plugins": [
     "prettier",
-    "simple-import-sort"
+    "simple-import-sort",
+    "cypress"
   ],
   "extends": [
     "next",
@@ -10,6 +11,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
+    "plugin:cypress/recommended",
     "plugin:prettier/recommended"
   ],
   "rules": {
@@ -22,7 +24,14 @@
     "react/require-default-props": "off",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
-    "no-console": [1, { "allow": ["warn"] }],
+    "no-console": [
+      1,
+      {
+        "allow": [
+          "warn"
+        ]
+      }
+    ],
     "arrow-body-style": "warn",
     "import/extensions": [
       "error",
