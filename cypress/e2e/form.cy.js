@@ -1,6 +1,6 @@
 describe('Form', () => {
   it('Be-visible ', () => {
-    cy.visit('/')
+    cy.visit('/');
 
     cy.get('input[type="text"]').should('be.visible');
     cy.get('button[type="submit"]').should('be.visible');
@@ -9,7 +9,7 @@ describe('Form', () => {
   })
 
   it('submit form', () => {
-    cy.visit('/')
+    cy.visit('/');
 
     const url = 'facebook/react'
     cy.get('input[type="text"]').type(url)
@@ -19,8 +19,7 @@ describe('Form', () => {
   })
 
   it('Form invalid', () => {
-    cy.visit('/')
-
+    cy.visit('/');
     const url = 'invalid-url'
     cy.get('input[type="text"]').type(url)
     cy.get('button[type="submit"]').click()
@@ -28,7 +27,7 @@ describe('Form', () => {
   })
 
   it('GitHub not found', () => {
-    cy.visit('/')
+    cy.visit('/');  
 
     const invalidRepo = 'invalid/invalid-repo';
     cy.get('input[type="text"]').type(invalidRepo);
