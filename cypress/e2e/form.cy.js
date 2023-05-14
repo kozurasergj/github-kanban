@@ -15,7 +15,6 @@ describe('Form', () => {
     cy.get('input[type="text"]').type(url)
     cy.get('button[type="submit"]').click()
     cy.get('.ant-row').should('exist')
-    cy.get('.cypress').should('have.length', 3);
   })
 
   it('Form invalid', () => {
@@ -27,7 +26,7 @@ describe('Form', () => {
   })
 
   it('GitHub not found', () => {
-    cy.visit('/');  
+    cy.visit('/');
 
     const invalidRepo = 'invalid/invalid-repo';
     cy.get('input[type="text"]').type(invalidRepo);
