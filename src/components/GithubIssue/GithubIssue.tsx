@@ -1,5 +1,6 @@
 import { DragOutlined } from '@ant-design/icons';
 import { Alert, Avatar, Button, Card, Col, Divider, Form, Input, Row, Spin, Typography } from 'antd';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -114,6 +115,19 @@ export const GithubIssue = () => {
             </Row>
           </Form>
         </Col>
+        {!state.apiGitHubIssues ? (
+          <div>
+            <h2>
+              This is my test project, created for personal purposes. As GitHub provides a convenient way to work with
+              issues, I wanted to make the process even smoother. The project is aimed at improving my skills in
+              Next.js, Cypress, TypeScript, Redux-thunk, Redux, Ant Design and Netlify. Please enter "facebook/react" to
+              test.
+            </h2>
+            <Image src="/bg.jpg" width="900" height="700" alt="Picture of the author" />
+          </div>
+        ) : (
+          <></>
+        )}
         <Row justify="space-between">
           {state &&
             state.apiGitHubIssues &&
@@ -148,6 +162,7 @@ export const GithubIssue = () => {
                         backgroundColor: '#fff',
                         borderRadius: '8px',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                        overflow: 'hidden',
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
