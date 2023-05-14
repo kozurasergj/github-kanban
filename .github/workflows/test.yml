@@ -9,4 +9,4 @@ jobs:
       - name: Inctall dependencies
         run: yarn
       - name: Test aplication
-        run: yarn test
+        run: yarn test:cypress
