@@ -1,2 +1,12 @@
 name: Test-cypress
-on: workflow_dispatch
+on: push
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Get repository code
+        uses: action/checkout@v3
+      - name: Inctall dependencies
+        run: yarn
+      - name: Test aplication
+        run: yarn test
