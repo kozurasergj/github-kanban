@@ -3,8 +3,7 @@
 
 Hi! 😀✋ I have developed a website that aims to enhance the experience of working with GitHub issues. If you are someone who regularly uses GitHub issues, I invite you to try out my website for a more convenient and streamlined workflow.
 
-👇👇👇
-[Link](https://canban-board.netlify.app)
+👉 [Click here](https://canban-board.netlify.app)
 
 By utilizing my website, you can expect improved features, enhanced organization, and a user-friendly interface for managing and tracking issues on GitHub. I believe that this tool will make your issue management process more efficient and productive.
 
