@@ -120,7 +120,7 @@ export const GithubIssue = () => {
             <h2>
               This is my test project, created for personal purposes. As GitHub provides a convenient way to work with
               issues, I wanted to make the process even smoother. The project is aimed at improving my skills in
-              Next.js, Cypress, TypeScript, Redux-thunk, Redux, Ant Design and Netlify. Please enter "facebook/react" to
+              Next.js, Cypress, TypeScript, Redux-thunk, Redux, Ant Design and Netlify. Please enter facebook/react to
               test.
             </h2>
             <Image src="/bg.jpg" width="900" height="700" alt="Picture of the author" />
