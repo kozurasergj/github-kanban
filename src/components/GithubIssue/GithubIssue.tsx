@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Board, Issue, RootState } from '@/interface/interface';
-import { DROP, DROP_EMPTY, START, DEFAULT } from '@/store/actionTypes';
+import { DROP, DROP_EMPTY, START } from '@/store/actionTypes';
 import { getIssuesCreator } from '@/store/getIssuesCreator';
 const { Title } = Typography;
 

@@ -19,15 +19,6 @@ export const reducerApiGitHub = (state = defaultStateApiGitHub, action: GetIssue
           { ...doneBoard, items: [] },
         ],
       };
-    case DEFAULT:
-      return {
-        ...state,
-        issues: [
-          { ...todoBoard, items: [] },
-          { ...inProgressBoard, items: [] },
-          { ...doneBoard, items: [] },
-        ],
-      };
     default:
       return state;
   }
