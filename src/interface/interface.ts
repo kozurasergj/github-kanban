@@ -19,7 +19,7 @@ export interface Board {
 
 export interface GetIssuesSuccessAction {
   type: string;
-  payload: Issue[];
+  payload?: Issue[];
 }
 
 export interface GetIssuesErrorAction {

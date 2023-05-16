@@ -1,6 +1,6 @@
 import { Board, GetIssuesAction } from '@/interface/interface';
 
-import { GET } from './actionTypes';
+import { DEFAULT, GET } from './actionTypes';
 
 const todoBoard: Board = { id: 1, title: 'ToDo', items: [] };
 const inProgressBoard: Board = { id: 2, title: 'In Progress', items: [] };
@@ -13,7 +13,20 @@ export const reducerApiGitHub = (state = defaultStateApiGitHub, action: GetIssue
     case GET:
       return {
         ...state,
-        issues: [{ ...todoBoard, items: action.payload }, inProgressBoard, doneBoard],
+        issues: [
+          { ...todoBoard, items: action.payload },
+          { ...inProgressBoard, items: [] },
+          { ...doneBoard, items: [] },
+        ],
+      };
+    case DEFAULT:
+      return {
+        ...state,
+        issues: [
+          { ...todoBoard, items: [] },
+          { ...inProgressBoard, items: [] },
+          { ...doneBoard, items: [] },
+        ],
       };
     default:
       return state;

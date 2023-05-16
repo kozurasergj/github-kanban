@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { Board, Issue, RootState } from '@/interface/interface';
-import { DROP, DROP_EMPTY, START } from '@/store/actionTypes';
+import { DROP, DROP_EMPTY, START, DEFAULT } from '@/store/actionTypes';
 import { getIssuesCreator } from '@/store/getIssuesCreator';
 const { Title } = Typography;
 
@@ -107,7 +107,7 @@ export const GithubIssue = () => {
               </Col>
               <Col xs={24} md={6}>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit" block>
+                  <Button type="primary" htmlType="submit" block >
                     Get Issues
                   </Button>
                 </Form.Item>
@@ -117,12 +117,12 @@ export const GithubIssue = () => {
         </Col>
         {!state.apiGitHubIssues ? (
           <div>
-            <h2>
+            <p style={{}}>
               This is my test project, created for personal purposes. As GitHub provides a convenient way to work with
               issues, I wanted to make the process even smoother. The project is aimed at improving my skills in
               Next.js, Cypress, TypeScript, Redux-thunk, Redux, Ant Design and Netlify. Please enter facebook/react to
               test.
-            </h2>
+            </p>
             <Image src="/bg.jpg" width="900" height="700" alt="Picture of the author" />
           </div>
         ) : (
@@ -146,54 +146,52 @@ export const GithubIssue = () => {
                   {board.title}
                 </Title>
                 <Divider />
-                {board.items &&
-                  board.items.length > 0 &&
-                  board.items.map((item, indexIssue: number) => (
-                    <Card
-                      onDragOver={(e) => dragOverHandler(e)}
-                      onDragStart={(e) => dragStartHandler(e, board, item)}
-                      onDrop={(e) => dragDropHandler(e, board, indexIssue, item)}
-                      key={item.id}
-                      draggable
-                      size="small"
-                      bordered={true}
-                      style={{
-                        paddingBottom: '0px',
-                        backgroundColor: '#fff',
-                        borderRadius: '8px',
-                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Title level={5} style={{ paddingBottom: '0px' }}>
-                          {item.title}
-                        </Title>
-                        <DragOutlined style={{ fontSize: '18px' }} />
-                      </div>
-                      <div style={{ paddingBottom: '0px' }}>
-                        <p style={{ fontSize: '18px', color: 'rgba(0, 0, 0, 0.5)', paddingBottom: '0px' }}>
-                          {item.body && item.body.slice(0, 100)}...
-                        </p>
-                      </div>
-                      <p style={{ fontSize: '15px', paddingBottom: '0px' }}>
-                        Date: {new Date(item.created_at).toLocaleString()}
+                {board.items.map((item, indexIssue: number) => (
+                  <Card
+                    onDragOver={(e) => dragOverHandler(e)}
+                    onDragStart={(e) => dragStartHandler(e, board, item)}
+                    onDrop={(e) => dragDropHandler(e, board, indexIssue, item)}
+                    key={item.id}
+                    draggable
+                    size="small"
+                    bordered={true}
+                    style={{
+                      paddingBottom: '0px',
+                      backgroundColor: '#fff',
+                      borderRadius: '8px',
+                      boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <Title level={5} style={{ paddingBottom: '0px' }}>
+                        {item.title}
+                      </Title>
+                      <DragOutlined style={{ fontSize: '18px' }} />
+                    </div>
+                    <div style={{ paddingBottom: '0px' }}>
+                      <p style={{ fontSize: '18px', color: 'rgba(0, 0, 0, 0.5)', paddingBottom: '0px' }}>
+                        {item.body && item.body.slice(0, 100)}...
                       </p>
-                      <p style={{ fontSize: '15px', paddingBottom: '0px' }}>
-                        <a
-                          href={item.html_url}
-                          draggable={false}
-                          style={{ maxWidth: '100%', display: 'inline-block', overflow: 'hidden' }}
-                        >
-                          {item.html_url}
-                        </a>
-                      </p>
-                      <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '0px' }}>
-                        <Avatar src={item.user.avatar_url} alt="User Avatar" style={{ paddingRight: '5px' }} />
-                        <p style={{ fontSize: '15px', paddingBottom: '0px' }}>User: {item.user.login}</p>
-                      </div>
-                    </Card>
-                  ))}
+                    </div>
+                    <p style={{ fontSize: '15px', paddingBottom: '0px' }}>
+                      Date: {new Date(item.created_at).toLocaleString()}
+                    </p>
+                    <p style={{ fontSize: '15px', paddingBottom: '0px' }}>
+                      <a
+                        href={item.html_url}
+                        draggable={false}
+                        style={{ maxWidth: '100%', display: 'inline-block', overflow: 'hidden' }}
+                      >
+                        {item.html_url}
+                      </a>
+                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', paddingBottom: '0px' }}>
+                      <Avatar src={item.user.avatar_url} alt="User Avatar" style={{ paddingRight: '5px' }} />
+                      <p style={{ fontSize: '15px', paddingBottom: '0px' }}>User: {item.user.login}</p>
+                    </div>
+                  </Card>
+                ))}
               </Col>
             ))}
         </Row>
